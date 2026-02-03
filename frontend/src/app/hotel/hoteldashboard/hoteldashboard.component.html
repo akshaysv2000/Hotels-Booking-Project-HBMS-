@@ -1,0 +1,9 @@
+<div [class.dark-mode]="isDarkMode">
+  <app-hoteltopbar (toggleDark)="toggleDarkMode()" [isDarkMode]="isDarkMode"></app-hoteltopbar>
+  <div class="layout">
+    <app-hotelsidebar></app-hotelsidebar>
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

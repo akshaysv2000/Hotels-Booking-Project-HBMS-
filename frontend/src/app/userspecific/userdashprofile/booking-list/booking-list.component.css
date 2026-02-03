@@ -1,0 +1,65 @@
+.table-container {
+  background: #fff;
+  border: 2px solid #cdcbcb;
+}
+
+.custom-table {
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+.custom-table thead {
+  background: linear-gradient(135deg, #6c63ff, #5a54e7);
+  color: #fff;
+}
+
+.custom-table thead th {
+  padding: 14px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  border: none;
+}
+
+.custom-table tbody tr {
+  background: #f9f9ff;
+  transition: all 0.2s ease;
+}
+
+.custom-table tbody tr:hover {
+  background: #f0f0ff;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(108, 99, 255, 0.15);
+}
+
+.custom-table tbody td {
+  padding: 12px;
+  font-size: 0.9rem;
+  color: #444;
+  text-align: center;
+  border-top: none;
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.status-badge.paid {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-badge.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}

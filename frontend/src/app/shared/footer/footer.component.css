@@ -1,0 +1,36 @@
+/* about us section */
+
+.about-section {
+  background: transparent;
+  color: #333;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.about-section .section-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  display: inline-block;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.about-section .section-heading::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 3px;
+  background-color: #dc3545;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.about-section .section-description {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #555;
+}

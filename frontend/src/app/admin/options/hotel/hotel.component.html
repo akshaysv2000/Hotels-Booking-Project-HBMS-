@@ -1,0 +1,44 @@
+<div class="container-fluid hotels-container shadow-sm">
+  <h2 class="mb-4 fw-bold">Approved Hotels</h2>
+
+  <div *ngIf="loading" class="text-muted">Loading hotels...</div>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <table *ngIf="!loading && hotels.length" class="table modern-table align-middle">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Owner</th>
+        <th>Contact</th>
+        <th>Status</th>
+        <th>Created At</th>
+        <th class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let h of hotels">
+        <td>{{ h.hotelId }}</td>
+        <td class="fw-semibold">{{ h.name }}</td>
+        <td>{{ h.address }}</td>
+        <td>{{ h.ownerName }}</td>
+        <td>{{ h.contactNumber }}</td>
+        <td>
+          <span class="badge bg-success px-3 py-2" *ngIf="h.status === 'Approved'">{{ h.status }}</span>
+          <span class="badge bg-secondary px-3 py-2" *ngIf="h.status !== 'Approved'">{{ h.status }}</span>
+        </td>
+        <td>{{ h.createdAt | date:'dd-MMM-yyyy HH:mm' }}</td>
+        <td class="text-center">
+          <button class="btn btn-sm btn-block-hotel">
+            <i class="bi bi-slash-circle me-1"></i> Block
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && !hotels.length" class="text-muted text-center py-4">
+    No hotels found.
+  </div>
+</div>

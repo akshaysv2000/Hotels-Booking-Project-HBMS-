@@ -1,0 +1,76 @@
+.hotels-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Heading */
+.hotels-container h2 {
+  color: #0d1117;
+  font-size: 1.75rem;
+  border-left: 5px solid #0d6efd;
+  padding-left: 12px;
+}
+
+/* Modern Table */
+.modern-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 6px;
+  background: transparent;
+}
+
+/* Table header */
+.modern-table thead th {
+  background: #343a40; /* Bootstrap dark gray */
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  padding: 12px;
+  border: none;
+}
+
+/* Table rows */
+.modern-table tbody tr {
+  background: #f8f9fa;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+.modern-table tbody tr:hover {
+  background: #e9f2ff;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Table cells */
+.modern-table td {
+  padding: 12px;
+  border: none;
+  vertical-align: middle;
+  font-size: 0.95rem;
+  color: #212529;
+}
+
+/* Status badge */
+.badge {
+  font-size: 0.85rem;
+  border-radius: 8px;
+}
+/* Block button */
+.btn-block-hotel {
+  background: #dc3545; /* Bootstrap danger red */
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.btn-block-hotel:hover {
+  background: #bb2d3b; /* darker red */
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(220,53,69,0.3);
+}

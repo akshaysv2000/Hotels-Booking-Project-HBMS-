@@ -1,0 +1,71 @@
+
+/* Modern topbar look */
+.topbar {
+  height: 70px;
+  background: #194651; /* clean modern white */
+  color: white;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  font-family: "Poppins", sans-serif;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-icon {
+  font-size: 1.8rem;
+  color: #1976d2; /* brand accent blue */
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.page-title {
+  font-size: 1rem;
+  opacity: 0.7;
+  margin-left: 6px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+/* Right side actions */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Theme toggle looks like a button */
+app-theme-toggle {
+  padding: 6px 3px;
+  border-radius: 8px;
+  background: #f5f5f5;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+app-theme-toggle:hover {
+  background: #e0e0e0;
+}
+
+/* Logout button: modern pill shape */
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.9rem;
+  text-transform: none; /* keep normal text */
+}

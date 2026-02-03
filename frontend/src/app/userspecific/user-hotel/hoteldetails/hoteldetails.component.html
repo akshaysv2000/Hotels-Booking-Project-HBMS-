@@ -1,0 +1,205 @@
+<app-logobar></app-logobar>
+
+<div class="container my-5" style="max-width: 1200px;">
+
+  <!-- Loading & Error -->
+  <div *ngIf="loading" class="text-center my-4 fw-bold text-primary">Loading hotel details...</div>
+  <div *ngIf="error" class="alert alert-danger text-center">{{ error }}</div>
+
+  <div *ngIf="hotelDetails">
+
+    <!-- Header Card -->
+    <div class="p-4 mb-5 bg-white rounded-3 shadow-lg">
+      <h1 class="fw-bold display-5 mb-2 text-dark">{{ hotelDetails.name }}</h1>
+      <div class="d-flex align-items-center mb-4">
+        <i class="bi bi-geo-alt-fill text-danger me-2"></i>
+        <span class="text-muted fst-italic">{{ hotelDetails.location }}</span>
+      </div>
+
+      <!-- Image Gallery -->
+      <div class="d-flex gap-3">
+        <div class="flex-shrink-0 w-60">
+          <img *ngIf="hotelDetails.imageUrls.length > 0" 
+               [src]="hotelDetails.imageUrls[0]" 
+               alt="Hotel Main"
+               class="img-fluid rounded-3 shadow-sm"
+               style="height: 320px; object-fit: cover; width: 100%; transition: 0.3s;" />
+        </div>
+
+        <div class="flex-grow-1 d-flex flex-column gap-3">
+          <img *ngIf="hotelDetails.imageUrls.length > 1" 
+               [src]="hotelDetails.imageUrls[1]" 
+               class="img-fluid rounded-3 shadow-sm" 
+               style="height: 155px; object-fit: cover; transition: 0.3s;" />
+          <img *ngIf="hotelDetails.imageUrls.length > 2" 
+               [src]="hotelDetails.imageUrls[2]" 
+               class="img-fluid rounded-3 shadow-sm" 
+               style="height: 155px; object-fit: cover; transition: 0.3s;" />
+        </div>
+
+        <div *ngIf="hotelDetails.imageUrls.length > 3" 
+             class="position-relative rounded-3 shadow-sm"
+             style="width: 90px; height: 320px; cursor: pointer; overflow: hidden;"
+             (click)="showMoreImages()">
+          <img [src]="hotelDetails.imageUrls[3]" 
+               alt="Hotel Image 4"
+               class="img-fluid" 
+               style="height: 100%; width: 100%; object-fit: cover; filter: brightness(0.7);" />
+          <div class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-5">
+            +{{ hotelDetails.imageUrls.length - 3 }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rooms + Booking -->
+    <div class="d-flex mb-5 flex-wrap gap-4">
+
+      <!-- Room Types -->
+      <div class="flex-grow-1">
+        <h2 class="mb-3 fw-bold text-primary">Room Types & Details</h2>
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+          <div *ngFor="let room of hotelDetails.rooms" class="col">
+            <div class="card h-100 border-0 shadow-sm rounded-3 hover-shadow">
+              <img src="assets/images/default-room.png" 
+                   class="card-img-top rounded-top-3"
+                   style="height: 160px; object-fit: cover;">
+              <div class="card-body">
+                <h5 class="card-title fw-semibold">{{ room.roomType }}</h5>
+                <p class="mb-1"><i class="bi bi-currency-rupee"></i>{{ room.pricePerNight }}</p>
+                <p><i class="bi bi-door-closed"></i> {{ room.totalRooms }} available</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking Form -->
+      <div class="flex-shrink-0 bg-light p-4 rounded-3 shadow-lg" style="width: 320px;">
+        <h4 class="fw-bold mb-3 text-primary">Check Availability</h4>
+        <form #availabilityForm="ngForm" (ngSubmit)="checkAvailability()">
+
+          <div class="mb-3">
+            <label for="roomType" class="form-label">Room Type</label>
+            <select id="roomType" class="form-select" required [(ngModel)]="availability.roomId" name="roomId">
+              <option [ngValue]="null" disabled>Select Room</option>
+              <option *ngFor="let room of hotelDetails.rooms" [value]="room.roomId">{{ room.roomType }}</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="checkIn" class="form-label">Check-In</label>
+            <input id="checkIn" type="date" class="form-control" required [(ngModel)]="availability.checkIn" name="checkIn" />
+          </div>
+
+          <div class="mb-3">
+            <label for="checkOut" class="form-label">Check-Out</label>
+            <input id="checkOut" type="date" class="form-control" required [(ngModel)]="availability.checkOut" name="checkOut" />
+          </div>
+
+          <div class="mb-3">
+            <label for="numberOfRooms" class="form-label">Rooms</label>
+            <input id="numberOfRooms" type="number" class="form-control" min="1" required [(ngModel)]="availability.numberOfRooms" name="numberOfRooms" />
+          </div>
+
+          <div class="d-grid gap-2">
+            <button type="button" class="btn btn-primary" (click)="checkAvailability()">Check</button>
+            <button type="button" class="btn btn-success" (click)="toggleBookingForm()" [disabled]="!isAvailable">Book</button>
+          </div>
+        </form>
+        <div *ngIf="availabilityMessage" class="mt-2 small fw-bold" [ngClass]="{'text-success': isAvailable, 'text-danger': !isAvailable}">
+          {{ availabilityMessage }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Facilities -->
+    <div class="mb-5 p-4 bg-white rounded-3 shadow-sm">
+      <h4 class="fw-bold text-primary mb-3">Facilities</h4>
+      <div class="d-flex flex-wrap gap-2">
+        <span *ngFor="let facility of hotelDetails.facilities" class="badge bg-light text-dark border px-3 py-2">
+          <i class="bi bi-check-circle-fill text-success me-1"></i>{{ facility }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-5 p-4 bg-white rounded-3 shadow-sm">
+      <h4 class="fw-bold text-primary mb-3">Description</h4>
+      <p class="text-muted">{{ hotelDetails.description || "No description available." }}</p>
+    </div>
+
+    <!-- Contact -->
+    <div class="mb-5 p-4 bg-white rounded-3 shadow-sm">
+      <h4 class="fw-bold text-primary mb-3">Address & Contact</h4>
+      <p><i class="bi bi-geo-alt-fill text-danger me-2"></i>{{ hotelDetails.address || 'Address not available' }}</p>
+      <p><i class="bi bi-telephone-fill text-primary me-2"></i>{{ hotelDetails.contactNumber || 'Contact not available' }}</p>
+    </div>
+
+    <!-- Reviews -->
+    <section class="mb-5">
+      <h2 class="text-center mb-4 fw-bold text-primary">Reviews & Ratings</h2>
+
+      <!-- Review Input -->
+      <div class="mb-4 p-4 bg-white rounded-3 shadow-sm">
+        <h5 class="fw-semibold mb-3">Write a Review</h5>
+        <form (ngSubmit)="submitReview()" #reviewForm="ngForm">
+          <div class="mb-3">
+            <label for="rating" class="form-label">Rating</label>
+            <input type="number" id="rating" class="form-control" name="rating" min="1" max="5" required [(ngModel)]="newReview.rating" />
+          </div>
+          <div class="mb-3">
+            <label for="comment" class="form-label">Your Review</label>
+            <textarea id="comment" class="form-control" name="comment" rows="3" required [(ngModel)]="newReview.comment"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="reviewForm.invalid || submittingReview">Submit</button>
+        </form>
+      </div>
+
+      <!-- Review List -->
+      <div *ngIf="hotelDetails.reviews?.length; else noReviews">
+        <div *ngFor="let review of hotelDetails.reviews" class="p-3 mb-3 rounded-3 shadow-sm border-start border-4 border-primary bg-white">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <strong>{{ review.username }}</strong>
+            <small class="text-muted">{{ review.date | date: 'mediumDate' }}</small>
+          </div>
+          <div class="text-warning mb-1">⭐ {{ review.rating }}/5</div>
+          <p class="mb-0">{{ review.comment }}</p>
+        </div>
+      </div>
+      <ng-template #noReviews><p class="text-center text-muted">No reviews yet.</p></ng-template>
+    </section>
+  </div>
+</div>
+
+<!-- Booking Popup -->
+<div *ngIf="showBookingForm" class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex justify-content-center align-items-center" style="z-index: 1000;">
+  <div class="bg-white p-4 rounded-3 shadow-lg" style="max-width: 420px; width: 90%;">
+    <h3 class="fw-bold mb-3 text-primary">Book Rooms</h3>
+    <form #bookingForm="ngForm" (ngSubmit)="initiateBooking()">
+      <div class="mb-3">
+        <label for="roomId" class="form-label">Room Type</label>
+        <select id="roomId" name="roomId" class="form-select" required [(ngModel)]="bookingData.roomId">
+          <option [ngValue]="null" disabled>Select Room</option>
+          <option *ngFor="let room of hotelDetails.rooms" [value]="room.roomId">{{ room.roomType }}</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="checkInDate" class="form-label">Check-In</label>
+        <input type="date" id="checkInDate" name="checkInDate" class="form-control" [(ngModel)]="bookingData.checkInDate" required>
+      </div>
+      <div class="mb-3">
+        <label for="checkOutDate" class="form-label">Check-Out</label>
+        <input type="date" id="checkOutDate" name="checkOutDate" class="form-control" [(ngModel)]="bookingData.checkOutDate" required>
+      </div>
+      <div class="mb-3">
+        <label for="numberOfRooms" class="form-label">Rooms</label>
+        <input type="number" id="numberOfRooms" name="numberOfRooms" class="form-control" [(ngModel)]="bookingData.numberOfRooms" min="1" required>
+      </div>
+      <div class="d-flex justify-content-end gap-2">
+        <button type="submit" class="btn btn-primary" [disabled]="bookingSubmitting">Confirm</button>
+        <button type="button" class="btn btn-outline-secondary" (click)="toggleBookingForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

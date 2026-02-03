@@ -1,0 +1,39 @@
+.hero-container {
+  border-radius: 30px;       /* curves the outer container */
+  overflow: hidden;          /* clips the image & content to the curve */
+  max-width: 1350px;         /* optional: control total width */
+  margin: auto;              /* center horizontally */
+  box-shadow: 0 4px 30px rgba(0,0,0,0.1); /* optional shadow */
+  max-height: 300px;  
+}
+
+/* Outer hero section wrapper */
+.hero-bg {
+  position: relative;
+  background: url('../../../assets/photo-1611892440504-42a792e24d32.jpeg') center/cover no-repeat;
+  color: white;
+  padding: 100px 0;
+  border-radius: 30px;
+  overflow: hidden;
+  max-width: 1000px;       /* keep it from being too wide */
+  margin: auto;            /* center horizontally */
+  box-shadow: 0 4px 36px rgba(0,0,0,0.15);
+}
+
+.hero-card, .hero-content {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+.hero-card h1,
+.hero-card p {
+  color: #fff !important;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.65);
+}
+.hero-card .input-group .form-control {
+  background: rgba(255,255,255,0.25);
+  color: #222;
+  border: none;
+  backdrop-filter: blur(95px);
+}

@@ -1,0 +1,21 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { UserdashprofileComponent } from './userdashprofile.component';
+
+describe('UserdashprofileComponent', () => {
+  let component: UserdashprofileComponent;
+  let fixture: ComponentFixture<UserdashprofileComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [UserdashprofileComponent]
+    });
+    fixture = TestBed.createComponent(UserdashprofileComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

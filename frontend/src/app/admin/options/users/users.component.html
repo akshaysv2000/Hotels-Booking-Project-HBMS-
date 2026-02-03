@@ -1,0 +1,35 @@
+<div class="container-fluid users-container shadow-sm">
+  <h2 class="mb-4 fw-bold">All Users</h2>
+  
+  <div *ngIf="loading" class="text-muted">Loading users...</div>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <table *ngIf="!loading && users.length" class="table modern-table align-middle">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let u of users">
+        <td>{{ u.userId }}</td>
+        <td class="fw-semibold">{{ u.username }}</td>
+        <td>{{ u.name }}</td>
+        <td>{{ u.email }}</td>
+        <td>{{ u.phone }}</td>
+        <td class="text-center">
+          <button class="btn-delete">Delete User</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && !users.length" class="text-muted text-center py-4">
+    No users found.
+  </div>
+</div>

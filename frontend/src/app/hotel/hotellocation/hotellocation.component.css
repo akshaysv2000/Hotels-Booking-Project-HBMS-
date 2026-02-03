@@ -1,0 +1,40 @@
+.location-container {
+  max-width: 800px;
+  margin: 30px auto;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.location-heading {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #f1f1f1; /* lighter for dark bg */
+}
+
+.map-card {
+  background: #1e1e1e; /* dark background */
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+  margin-bottom: 20px;
+  padding: 6px; /* small padding to balance look */
+}
+
+.save-btn {
+  background: linear-gradient(135deg, #007aff, #00c6ff);
+  border: none;
+  color: white;
+  padding: 12px 28px;
+  font-size: 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.save-btn:hover {
+  background: linear-gradient(135deg, #00c6ff, #007aff);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 198, 255, 0.3);
+}

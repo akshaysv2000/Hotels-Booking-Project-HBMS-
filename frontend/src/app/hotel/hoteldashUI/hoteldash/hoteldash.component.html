@@ -1,0 +1,69 @@
+<div class="dashboard-cards">
+  <div class="card stat-card">
+    <h3>Total Bookings</h3>
+    <p class="stat-value">{{ totalBookings }}</p>
+  </div>
+  <div class="card stat-card">
+    <h3>Total Amount Received</h3>
+    <p class="stat-value">{{ totalAmount | currency:'INR':'symbol' }}</p>
+  </div>
+</div>
+
+<div class="charts-container">
+  <!-- Pie Chart -->
+  <div class="chart-box">
+    <h4>Bookings Per Room Type</h4>
+    <div class="chart-wrapper">
+      <ngx-charts-pie-chart
+        [view]="view"
+        [results]="bookingsPerRoomTypeData"
+        [legend]="showLegend"
+        [labels]="showLabels"
+        [animations]="animations">
+      </ngx-charts-pie-chart>
+    </div>
+  </div>
+
+  <!-- Line Charts -->
+  <div class="chart-box large">
+    <div class="chart-section">
+      <h4>Bookings Per Day</h4>
+      <div class="chart-wrapper">
+        <ngx-charts-line-chart
+          [view]="view"
+          [scheme]="'vivid'"
+          [results]="[{ name: 'Bookings', series: bookingsPerDayData }]"
+          [legend]="showLegend"
+          [xAxis]="xAxis"
+          [yAxis]="yAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [animations]="animations"
+          [timeline]="timeline">
+        </ngx-charts-line-chart>
+      </div>
+    </div>
+
+    <div class="chart-section">
+      <h4>Amount Per Day</h4>
+      <div class="chart-wrapper">
+        <ngx-charts-line-chart
+          [view]="view"
+          [scheme]="'cool'"
+          [results]="[{ name: 'Amount', series: amountPerDayData }]"
+          [legend]="showLegend"
+          [xAxis]="xAxis"
+          [yAxis]="yAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          xAxisLabel="Date"
+          yAxisLabel="Amount"
+          [animations]="animations"
+          [timeline]="timeline">
+        </ngx-charts-line-chart>
+      </div>
+    </div>
+  </div>
+</div>

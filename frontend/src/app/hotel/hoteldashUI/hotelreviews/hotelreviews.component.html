@@ -1,0 +1,48 @@
+<!-- reviews-list.component.html -->
+<div class="reviews-container">
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading reviews...</p>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="error" class="error-box">
+    {{ error }}
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrapper" *ngIf="!loading && !error">
+    <table class="modern-table">
+      <thead>
+        <tr>
+          <th>Posted On</th>
+          <th>Rating</th>
+          <th>Comment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of reviews">
+          <td>{{ r.reviewDate }}</td>
+          <td>
+            <div class="rating">
+              <ng-container *ngFor="let star of [1,2,3,4,5]">
+                <span 
+                  class="star"
+                  [class.filled]="star <= r.rating"
+                >★</span>
+              </ng-container>
+              <span class="rating-number">({{ r.rating }})</span>
+            </div>
+          </td>
+          <td>{{ r.comment }}</td>
+        </tr>
+
+        <!-- Empty State -->
+        <tr *ngIf="reviews.length === 0">
+          <td colspan="3" class="empty-msg">No reviews found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

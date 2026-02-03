@@ -1,0 +1,72 @@
+<div class="hotel-container container">
+  <h2 class="page-title">Hotel Details</h2>
+
+  <!-- Description -->
+  <section class="card-section">
+    <h3 class="section-title">Description</h3>
+    <textarea id="desc" [(ngModel)]="description" rows="3" placeholder="Describe your hotel"></textarea>
+  </section>
+
+  <!-- Facilities -->
+  <section class="card-section">
+    <h3 class="section-title">Facilities</h3>
+    <div class="inline-form">
+      <input [(ngModel)]="facilityName" placeholder="e.g., Pool, Gym" />
+      <button (click)="addFacility()" type="button" class="btn add-btn">Add</button>
+    </div>
+    <ul class="list">
+      <li *ngFor="let facility of facilities; let i = index" class="list-item">
+        {{ facility.name }}
+        <span class="status" [ngClass]="facility.status">{{ facility.status }}</span>
+        <div class="actions">
+          <button type="button" (click)="removeFacility(i)" class="btn small danger">X</button>
+          <button *ngIf="facility.status==='error'" type="button" (click)="retryFacility(i)" class="btn small warning">Retry</button>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Rooms -->
+  <section class="card-section">
+    <h3 class="section-title">Rooms</h3>
+    <div class="inline-form">
+      <input [(ngModel)]="roomType" placeholder="Room Type (e.g., Deluxe)" />
+      <input [(ngModel)]="pricePerNight" type="number" placeholder="Price per Night" />
+      <input [(ngModel)]="totalRooms" type="number" placeholder="Total Rooms" />
+      <button (click)="addRoom()" type="button" class="btn add-btn">Add</button>
+    </div>
+    <ul class="list">
+      <li *ngFor="let room of rooms; let i = index" class="list-item">
+        {{ room.roomType }} - {{ room.pricePerNight | currency:'INR':'symbol' }} - Total: {{ room.totalRooms }}
+        <span class="status" [ngClass]="room.status">{{ room.status }}</span>
+        <div class="actions">
+          <button type="button" (click)="removeRoom(i)" class="btn small danger">X</button>
+          <button *ngIf="room.status==='error'" type="button" (click)="retryRoom(i)" class="btn small warning">Retry</button>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Images -->
+  <section class="card-section">
+    <h3 class="section-title">Hotel Images</h3>
+    <input type="file" (change)="onImageSelected($event)" accept="image/*" class="file-input" />
+    <div class="images-list">
+      <div *ngFor="let image of images; let i = index" class="image-item">
+        <img [src]="image.preview" alt="Hotel Image" />
+        <span class="status" [ngClass]="image.status">{{ image.status }}</span>
+        <div class="actions">
+          <button type="button" (click)="removeImage(i)" class="btn small danger">X</button>
+          <button *ngIf="image.status==='error'" type="button" (click)="retryImage(i)" class="btn small warning">Retry</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Submit All -->
+  <button (click)="submitAll()" [disabled]="submitting" class="btn submit-btn">
+    {{ submitting ? 'Submitting...' : 'Submit All Details' }}
+  </button>
+
+  <div class="error-msg" *ngIf="submitError">{{ submitError }}</div>
+</div>

@@ -1,0 +1,5 @@
+# Ignore Editor folders that might appear at the Root
+.idea/
+.vscode/
+*.iml
+.DS_Store

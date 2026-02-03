@@ -1,0 +1,36 @@
+<div *ngIf="admin" class="admin-profile-container">
+  <div class="admin-card">
+    <h2 class="admin-title">Admin Profile</h2>
+
+    <div *ngIf="!editMode" class="profile-info">
+      <p><strong>ID:</strong> {{ admin.adminId }}</p>
+      <p><strong>Username:</strong> {{ admin.username }}</p>
+      <button class="btn edit-btn" (click)="enableEdit()">Edit Profile</button>
+    </div>
+
+    <form *ngIf="editMode" [formGroup]="editForm" (ngSubmit)="saveChanges()" class="edit-form">
+      <div class="form-group">
+        <label>New Username</label>
+        <input formControlName="newUsername" class="form-input" />
+      </div>
+
+      <div class="form-group">
+        <label>New Password</label>
+        <input formControlName="newPassword" type="password" class="form-input" />
+      </div>
+
+      <div class="btn-group">
+        <button type="submit" class="btn save-btn" [disabled]="editForm.invalid">Save</button>
+        <button type="button" class="btn cancel-btn" (click)="cancelEdit()">Cancel</button>
+      </div>
+    </form>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!admin && !errorMessage" class="loading-text">
+  Loading profile...
+</div>

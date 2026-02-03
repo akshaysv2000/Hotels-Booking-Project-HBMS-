@@ -1,0 +1,67 @@
+/* Container */
+.users-container {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Heading */
+.users-container h2 {
+  color: #2c3e50;
+  font-weight: 600;
+  border-bottom: 2px solid #eaeaea;
+  padding-bottom: 10px;
+}
+
+/* Modern table */
+.modern-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Header */
+.modern-table thead th {
+  background: #343a40; /* Bootstrap dark gray */
+  color: #fff;
+  font-weight: 600;
+  padding: 14px;
+  font-size: 0.95rem;
+  text-align: left;
+  border: none;
+}
+
+/* Body */
+.modern-table tbody td {
+  padding: 12px 14px;
+  font-size: 0.9rem;
+  border-top: 1px solid #e9ecef;
+  color: #2c3e50;
+}
+
+/* Row hover */
+.modern-table tbody tr:hover {
+  background-color: #f7faff;
+  transition: background 0.2s ease;
+}
+/* Delete button */
+.btn-delete {
+  background: transparent;
+  color: #e63946;
+  border: 1px solid #e63946;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-delete:hover {
+  background: #e63946;
+  color: #fff;
+}

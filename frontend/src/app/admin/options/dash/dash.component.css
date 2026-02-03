@@ -1,0 +1,41 @@
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.dashboard-cards.vertical-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+  max-width: 450px; /* keeps it centered and neat */
+}
+
+.stat-card {
+  background: #1e293b; /* dark blue-gray */
+  color: #f1f5f9;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+
+.stat-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.25);
+}
+
+.stat-card h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #94a3b8; /* muted gray */
+  margin-bottom: 10px;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #38bdf8; /* cyan accent */
+}

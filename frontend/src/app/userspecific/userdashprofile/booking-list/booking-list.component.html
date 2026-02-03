@@ -1,0 +1,41 @@
+<div *ngIf="loading" class="text-center py-4">Loading...</div>
+
+<div class="table-container shadow-sm rounded p-3" *ngIf="!loading">
+  <table class="table custom-table mb-0">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Hotel</th>
+        <th>Room Type</th>
+        <th>Number of Rooms</th>
+        <th>Check-in</th>
+        <th>Check-out</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Hotel Contact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let b of bookings">
+        <td>{{ b.bookingDate }}</td>
+        <td>{{ b.hotelName }}</td>
+        <td>{{ b.roomType }}</td>
+        <td>{{ b.numberOfRooms }}</td>
+        <td>{{ b.check_in_date }}</td>
+        <td>{{ b.check_out_date }}</td>
+        <td>₹ {{ b.amount }}</td>
+        <td>
+          <span class="status-badge"
+                [ngClass]="{
+                  'paid': b.paymentStatus === 'Paid',
+                  'pending': b.paymentStatus === 'Pending',
+                  'cancelled': b.paymentStatus === 'Cancelled'
+                }">
+            {{ b.paymentStatus }}
+          </span>
+        </td>
+        <td>{{ b.hotelContactNumber }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,38 @@
+<form [formGroup]="profileForm" *ngIf="profileForm" class="profile-form p-4 shadow-sm rounded">
+  
+  <h3 class="form-title mb-4 text-center">My Profile</h3>
+
+  <div class="mb-3">
+    <label class="form-label">Username</label>
+    <input formControlName="username" class="form-control styled-input" [readonly]="!editMode">
+  </div>
+  
+  <div class="mb-3">
+    <label class="form-label">Name</label>
+    <input formControlName="name" class="form-control styled-input" [readonly]="!editMode">
+  </div>
+  
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input formControlName="email" class="form-control styled-input" [readonly]="!editMode">
+  </div>
+  
+  <div class="mb-3">
+    <label class="form-label">Phone</label>
+    <input formControlName="phone" class="form-control styled-input" [readonly]="!editMode">
+  </div>
+
+  <div class="mb-3" *ngIf="editMode">
+    <label class="form-label">Password</label>
+    <input type="password" formControlName="password" class="form-control styled-input">
+  </div>
+  
+  <div class="text-center" *ngIf="!editMode">
+    <button type="button" class="btn btn-primary px-4" (click)="enableEdit()">Edit</button>
+  </div>
+
+  <div class="text-center" *ngIf="editMode">
+    <button type="button" class="btn btn-success me-2 px-4" (click)="saveProfile()">Save</button>
+    <button type="button" class="btn btn-secondary px-4" (click)="cancelEdit()">Cancel</button>
+  </div>
+</form>

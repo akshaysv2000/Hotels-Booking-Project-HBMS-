@@ -1,0 +1,26 @@
+<!-- dashboard.component.html -->
+<div *ngIf="loading" class="loading-container">
+  <div class="spinner"></div>
+  <p>Loading dashboard stats...</p>
+</div>
+
+<div *ngIf="error" class="error-message">
+  {{ error }}
+</div>
+
+<div *ngIf="stats" class="dashboard-container">
+  <div class="dashboard-cards vertical-layout">
+    <div class="stat-card">
+      <h3>Total Users</h3>
+      <p class="stat-value">{{ stats.totalUsers }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>Total Approved Hotels</h3>
+      <p class="stat-value">{{ stats.totalApprovedHotels }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>Total PAID Payments</h3>
+      <p class="stat-value">{{ stats.totalPaidAmount | currency:'INR' }}</p>
+    </div>
+  </div>
+</div>

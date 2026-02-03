@@ -1,0 +1,30 @@
+/* Smooth card hover */
+.hotel-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.hotel-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* Hotel images */
+.hotel-img {
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+/* Loader size */
+.spinner-lg {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* Card footer styling */
+.card-footer {
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+}

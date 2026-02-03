@@ -1,0 +1,40 @@
+.profile-form {
+  max-width: 500px;
+  margin: auto;
+  background: #fff;
+  border: 1px solid #eee;
+}
+
+.form-title {
+  font-weight: 600;
+  color: #444;
+  position: relative;
+}
+
+.form-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  margin: 8px auto 0;
+  background: linear-gradient(135deg, #6c63ff, #5a54e7);
+  border-radius: 50px;
+}
+
+.form-label {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.styled-input {
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  transition: all 0.25s ease;
+}
+
+.styled-input:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 6px rgba(108,99,255,0.3);
+}

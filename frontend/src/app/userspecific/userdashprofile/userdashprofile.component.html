@@ -1,0 +1,37 @@
+<app-logobar></app-logobar>
+
+
+<div class="dashboard-container d-flex flex-column align-items-center justify-content-center my-4">
+   <div class="greeting-section text-center mb-4">
+    <h1 class="greeting-text">Hi {{ name }}</h1>
+    <div class="greeting-underline"></div>
+  </div>
+
+  <div class="tab-buttons d-flex gap-3 mb-3">
+  <button class="tab-btn"
+          [class.active]="activeTab === 'profile'"
+          (click)="setTab('profile')">
+    <i class="bi bi-person"></i>
+    <span>My Profile</span>
+  </button>
+
+  <button class="tab-btn"
+          [class.active]="activeTab === 'bookings'"
+          (click)="setTab('bookings')">
+    <i class="bi bi-card-list"></i>
+    <span>My Bookings</span>
+  </button>
+</div>
+
+
+  <ng-container [ngSwitch]="activeTab">
+    
+    <div *ngSwitchCase="'profile'" class="w-75">
+      <app-profile-details></app-profile-details>
+    </div>
+    
+    <div *ngSwitchCase="'bookings'" class="w-75">
+      <app-booking-list></app-booking-list>
+    </div>
+  </ng-container>
+</div>

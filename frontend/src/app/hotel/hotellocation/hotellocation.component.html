@@ -1,0 +1,21 @@
+<div class="location-container">
+  <h2 class="location-heading">📍 Select Your Location</h2>
+
+  <div class="map-card">
+    <google-map
+      height="400px"
+      width="100%"
+      [center]="center"
+      [zoom]="zoom"
+      (mapClick)="setMarker($event)">
+      <map-marker
+        *ngIf="markerPosition"
+        [position]="markerPosition"
+        [options]="{draggable: true}"
+        (dragend)="onMarkerDragEnd($event)">
+      </map-marker>
+    </google-map>
+  </div>
+
+  <button class="save-btn" (click)="submitLocation()">Save Location</button>
+</div>

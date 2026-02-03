@@ -1,0 +1,162 @@
+.hero-container {
+  border-radius: 30px;       /* curves the outer container */
+  overflow: hidden;          /* clips the image & content to the curve */
+  max-width: 1350px;         /* optional: control total width */
+  margin: auto;              /* center horizontally */
+  box-shadow: 0 4px 30px rgba(0,0,0,0.1); /* optional shadow */
+  max-height: 300px;  
+}
+
+/* Outer hero section wrapper */
+.hero-bg {
+  position: relative;
+  background: url('../../assets/photo-1611892440504-42a792e24d32.jpeg') center/cover no-repeat;
+  color: white;
+  padding: 100px 0;
+  border-radius: 30px;
+  overflow: hidden;
+  max-width: 1000px;       /* keep it from being too wide */
+  margin: auto;            /* center horizontally */
+  box-shadow: 0 4px 36px rgba(0,0,0,0.15);
+}
+
+.hero-card, .hero-content {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+.hero-card h1,
+.hero-card p {
+  color: #fff !important;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.65);
+}
+.hero-card .input-group .form-control {
+  background: rgba(255,255,255,0.25);
+  color: #222;
+  border: none;
+  backdrop-filter: blur(95px);
+}
+
+
+
+/* for popular destinations */
+
+/* Outer wrapper stretches full viewport width for bold layout */
+.popular-destinations-wrapper {
+  display: flex;
+  justify-content: center;
+  background: transparent !important;  /* make background fully transparent */
+  padding: 2rem 0;
+  box-shadow: none !important;          /* remove any shadows */
+}
+
+
+/* Inner container: wider than hero section and centered */
+.popular-destinations-grid {
+  max-width: 1350px;         /* adjust width as preferred */
+  width: 100%;
+  background: transparent !important;  /* make the inner container transparent as well */
+  border-radius: 0;          /* remove rounded corners if desired */
+  margin: 0 auto;
+  box-shadow: none !important;          /* remove any shadows */
+  padding: 0;                /* optionally remove padding for full blend */
+}
+
+
+/* Destination card base styles */
+.destination-card {
+  position: relative;
+  width: 100%;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #eee;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 2px 16px rgba(33,43,45,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sizes for cards */
+.dest-large {
+  height: 375px;
+}
+
+.dest-medium {
+  height: 180px;
+}
+
+.dest-small {
+  height: 180px;
+}
+
+/* Image inside card fills container without distortion */
+.destination-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+}
+
+/* Label overlay */
+.destination-label {
+  position: absolute;
+  left: 15px;
+  bottom: 15px;
+  background: rgba(255,255,255,0.85);
+  color: #223468;
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 4px 12px;
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 7px rgba(33,43,45,0.11);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Hover effect */
+.destination-card:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 14px 38px rgba(33,43,45,0.12);
+}
+
+/* about us section */
+
+.about-section {
+  background: transparent;
+  color: #333;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.about-section .section-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  display: inline-block;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.about-section .section-heading::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 3px;
+  background-color: #dc3545;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.about-section .section-description {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #555;
+}

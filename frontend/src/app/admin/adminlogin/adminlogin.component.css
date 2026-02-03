@@ -1,0 +1,52 @@
+/* Glass effect card (darker background for readability) */
+.login-card {
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+}
+
+/* Inputs with light text */
+.custom-input {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.custom-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Gradient button */
+.btn-gradient {
+  background: linear-gradient(135deg, #0d6efd, #6610f2);
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(135deg, #0b5ed7, #520dc2);
+  transform: scale(1.02);
+}
+
+/* Input group text */
+.input-group-text {
+  background: transparent !important;
+  border: none;
+  color: #0d6efd !important;
+}
+/* */
+
+
+.bg-dark {
+  background: linear-gradient(135deg, #0d1117, #1e2a47, #2d1b69);
+}
+
+

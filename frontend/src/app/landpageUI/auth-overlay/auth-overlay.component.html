@@ -1,0 +1,284 @@
+
+<div class="auth-overlay" *ngIf="isVisible">
+  <div class="auth-box">
+
+    <!-- Custom Close Button -->
+<button class="close-btn-custom" (click)="closeOverlay()">
+  &times;
+</button>
+
+
+    <!-- Top selector tabs -->
+    <div class="auth-tabs">
+      <button [class.active]="selectedRole === 'user'" (click)="selectRole('user')">User</button>
+      <button [class.active]="selectedRole === 'hotel'" (click)="selectRole('hotel')">Hotel</button>
+      <button [class.active]="selectedRole === 'admin'" (click)="selectRole('admin')">Admin</button>
+    </div>
+
+    <div class="auth-content ">
+
+      <!-- USER LOGIN -->
+      <ng-container *ngIf="selectedRole === 'user' && !isRegistering">
+        <h4>User Login</h4>
+        <form (ngSubmit)="onUserLogin()" #userLoginForm="ngForm">
+
+          <!-- Username -->
+          <div class="mb-3">
+            <label for="userLoginUsername" class="form-label">Username</label>
+            <div class="input-group">
+            <i class="bi bi-person"></i>
+            <input type="text"
+                   class="form-control"
+                   id="userLoginUsername"
+                   name="username"
+                   [(ngModel)]="userLogin.username"
+                   placeholder="Enter your username"
+                   required>
+          </div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-3 position-relative">
+            <label for="userLoginPassword" class="form-label">Password</label>
+            <div class="input-group">
+               <i class="bi bi-lock"></i>
+              <input [type]="showUserPassword ? 'text' : 'password'"
+                     class="form-control"
+                     id="userLoginPassword"
+                     name="password"
+                     [(ngModel)]="userLogin.password"
+                     placeholder="Enter your password"
+                     required
+                     minlength="6">
+              <button type="button"
+                      class="btn btn-outline-secondary"
+                      (click)="toggleUserPassword()"
+                      tabindex="-1">
+                <i class="bi" [ngClass]="showUserPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Error message -->
+          <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+          <!-- Submit -->
+          <button type="submit" class="btn btn-primary w-100" [disabled]="userLoginForm.invalid">Login</button>
+        </form>
+
+        <!-- Switch to signup -->
+        <p class="switch-text mt-3">New user? <a (click)="toggleRegister()">SignUp</a></p>
+      </ng-container>
+
+      <!-- USER REGISTER -->
+      <ng-container *ngIf="selectedRole === 'user' && isRegistering">
+        <h4>User Registration</h4>
+        <form (ngSubmit)="onUserRegister()" #userRegForm="ngForm">
+
+          <!-- Full Name -->
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <div class="input-group">
+            <input type="text" class="form-control" name="name" required
+                   [(ngModel)]="userRegister.name" #name="ngModel">
+            <div *ngIf="name.invalid && name.touched" class="text-danger">Name is required.</div>
+          </div>
+          </div>
+
+          <!-- Email -->
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <div class="input-group">
+            <input type="email" class="form-control" name="email" required
+                   [(ngModel)]="userRegister.email" #email="ngModel">
+            <div *ngIf="email.invalid && email.touched" class="text-danger">Please enter a valid email address.</div>
+          </div>
+          </div>
+
+          <!-- Username -->
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            <div class="input-group">
+            <input type="text" class="form-control" name="username" required
+                   pattern="^[a-z0-9_]+$"
+                   [(ngModel)]="userRegister.username" #username="ngModel"
+                   (ngModelChange)="userRegister.username = userRegister.username.toLowerCase()">
+            </div>
+            <div *ngIf="username.invalid && username.touched" class="text-danger">
+              Username must be lowercase letters, numbers, or underscores only.
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-3 position-relative">
+            <label class="form-label">Password</label>
+            <div class="input-group">
+              <input [type]="showRegPassword ? 'text' : 'password'"
+                     class="form-control"
+                     name="password"
+                     required
+                      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=<>?{}\[\]~]).{6,}$"
+                     [(ngModel)]="userRegister.password" #password="ngModel">
+              <button type="button" class="btn btn-outline-secondary"
+                      (click)="toggleRegPasswordVisibility()" tabindex="-1">
+                <i class="bi" [ngClass]="showRegPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+              </button>
+            </div>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger mt-1">
+              Password must be at least 6 characters long, include one uppercase, one lowercase, one number, and one symbol.
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="mb-3">
+            <label class="form-label">Phone</label>
+            <div class="input-group">
+            <input type="tel" class="form-control" name="phone" required
+                   pattern="^\d{10}$"
+                   [(ngModel)]="userRegister.phone" #phone="ngModel">
+            <div *ngIf="phone.invalid && phone.touched" class="text-danger">Phone number must be exactly 10 digits.</div>
+          </div>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="btn btn-primary w-100" [disabled]="userRegForm.invalid">Register</button>
+        </form>
+
+        <!-- Switch to login -->
+        <p class="switch-text mt-3">Already have an account? <a (click)="toggleRegister()">Login</a></p>
+      </ng-container>
+
+      <!-- HOTEL LOGIN -->
+      <ng-container *ngIf="selectedRole === 'hotel' && !isRegistering">
+        <h4>Hotel Login</h4>
+        <form (ngSubmit)="onHotelLogin()" #hotelLoginForm="ngForm">
+
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            <div class="input-group">
+              <i class="bi bi-person"></i>
+            <input type="text" class="form-control" name="username" placeholder="Enter your username"
+                   [(ngModel)]="hotelLogin.username" required>
+          </div>
+        </div>
+
+          <div class="mb-3 position-relative">
+            <label class="form-label">Password</label>
+            <div class="input-group">
+              <i class="bi bi-lock"></i>
+              <input [type]="showHotelPassword ? 'text' : 'password'"
+                     class="form-control"
+                     name="password"
+                     placeholder="Enter your password"
+                     [(ngModel)]="hotelLogin.password" required>
+              <button type="button"
+                      class="btn btn-outline-secondary"
+                      (click)="toggleHotelPassword()" tabindex="-1">
+                <i class="bi" [ngClass]="showHotelPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+              </button>
+            </div>
+          </div>
+
+          <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+          <button type="submit" class="btn btn-primary w-100" [disabled]="hotelLoginForm.invalid">Login</button>
+        </form>
+        <p class="switch-text">New hotel? <a (click)="toggleRegister()">SignUp</a></p>
+      </ng-container>
+
+      <!-- HOTEL REGISTER -->
+      <ng-container *ngIf="selectedRole === 'hotel' && isRegistering">
+        <h4>Hotel Registration</h4>
+        <form (ngSubmit)="onHotelRegister()" #hotelRegForm="ngForm">
+
+          <!-- Username -->
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            <div class="input-group">
+            <input type="text" class="form-control" name="username"
+                   required pattern="^[a-z0-9_]+$"
+                   [(ngModel)]="hotelRegister.username" #username="ngModel"
+                   (ngModelChange)="hotelRegister.username = hotelRegister.username.toLowerCase()">
+            </div>
+            <div *ngIf="username.invalid && username.touched" class="text-danger">
+              Username must only have lowercase letters, numbers, or underscores.
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-3 position-relative">
+            <label class="form-label">Password</label>
+            <div class="input-group">
+              <input [type]="showHotelRegPassword ? 'text' : 'password'"
+                     class="form-control"
+                     name="password"
+                     required
+                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=<>?{}\[\]~]).{6,}$"
+                     [(ngModel)]="hotelRegister.password" #password="ngModel">
+              <button type="button" class="btn btn-outline-secondary"
+                      (click)="toggleHotelRegPassword()" tabindex="-1">
+                <i class="bi" [ngClass]="showHotelRegPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+              </button>
+            </div>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger mt-1">
+              Password must be at least 6 characters, include one lowercase, one uppercase, one number, and one special character.
+            </div>
+          </div>
+
+          <!-- Hotel Name -->
+          <div class="mb-3">
+            <label class="form-label">Hotel Name</label>
+            <div class="input-group">
+            <input type="text" class="form-control" name="name"
+                   required [(ngModel)]="hotelRegister.name" #name="ngModel">
+          </div>
+          </div>
+
+          <!-- Address -->
+          <div class="mb-3">
+            <label class="form-label">Address</label>
+            <div class="input-group">
+            <input type="text" class="form-control" name="address"
+                   required [(ngModel)]="hotelRegister.address" #address="ngModel">
+          </div>
+          </div>
+
+          <!-- Owner Name -->
+          <div class="mb-3">
+            <label class="form-label">Owner Name</label>
+            <div class="input-group">
+            <input type="text" class="form-control" name="ownerName"
+                   required [(ngModel)]="hotelRegister.ownerName" #ownerName="ngModel">
+          </div>
+          </div>
+
+          <!-- Contact Number -->
+          <div class="mb-3">
+            <label class="form-label">Contact Number</label>
+            <div class="input-group">
+            <input type="tel" class="form-control" name="contactNumber"
+                   required pattern="^\d{10}$"
+                   [(ngModel)]="hotelRegister.contactNumber" #contactNumber="ngModel"></div>
+            <div *ngIf="contactNumber.invalid && contactNumber.touched" class="text-danger">
+              Contact number must be exactly 10 digits.
+            </div>
+          </div>
+
+          <!-- Location -->
+            <div class="mb-3">
+            <label class="form-label">Location</label>
+            <div class="input-group">
+            <input type="text" class="form-control" name="location"
+              required [(ngModel)]="hotelRegister.location" #location="ngModel">
+             </div>
+             </div>
+
+
+          <button type="submit" class="btn btn-primary w-100" [disabled]="hotelRegForm.invalid">Register</button>
+        </form>
+        <p class="switch-text mt-3">Already have an account? <a (click)="toggleRegister()">Login</a></p>
+      </ng-container>
+
+    </div>
+  </div>
+</div>
